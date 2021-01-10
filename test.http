@@ -1,14 +1,16 @@
 ### Get All Products
 GET http://localhost:8080/api/products
 Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MTA1NDU5MDYsInVzZXJuYW1lIjoic3VrZW5kYSJ9.V8vZrLDY0vq7OwhzbcPCn0pBH7tYJePlv_qIUZafL_o
 
 ### Create New Product
 POST http://localhost:8080/api/products
 Content-Type: application/json
 Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MTA1NDU5MDYsInVzZXJuYW1lIjoic3VrZW5kYSJ9.V8vZrLDY0vq7OwhzbcPCn0pBH7tYJePlv_qIUZafL_o
 
 {
-  "name": "Mac Book Pro 5",
+  "name": "Mac Book Pro 6",
   "price": 35000000,
   "quantity": 10
 }
@@ -19,7 +21,7 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "username": "Sukendaa",
+  "username": "Budi",
   "password": "Sukendaa",
   "email": "soekenda09@gmail.com",
   "phone": "098777889876"
@@ -32,5 +34,5 @@ Accept: application/json
 
 {
   "username": "sukenda",
-  "password": "sukenda"
+  "password": "Ke"
 }

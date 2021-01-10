@@ -67,8 +67,11 @@ func (service userServiceImpl) Login(request model.CreateUserRequest) (response 
 	user, err := service.repository.Login(request.Username, request.Password)
 	exception.PanicIfNeeded(err)
 
+	token, err := validation.CreateToken(user)
+	exception.PanicIfNeeded(err)
+
 	response = model.GetLoginResponse{
-		AccessToken: "Token jwt",
+		AccessToken: token,
 		User: model.GetUserResponse{
 			Id:       user.Id,
 			Username: user.Username,
