@@ -1,0 +1,36 @@
+### Get All Products
+GET http://localhost:8080/api/products
+Accept: application/json
+
+### Create New Product
+POST http://localhost:8080/api/products
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Mac Book Pro 5",
+  "price": 35000000,
+  "quantity": 10
+}
+
+### Register User
+POST http://localhost:8080/api/register
+Content-Type: application/json
+Accept: application/json
+
+{
+  "username": "Sukendaa",
+  "password": "Sukendaa",
+  "email": "soekenda09@gmail.com",
+  "phone": "098777889876"
+}
+
+### Login User
+POST http://localhost:8080/api/login
+Content-Type: application/json
+Accept: application/json
+
+{
+  "username": "sukenda",
+  "password": "sukenda"
+}
