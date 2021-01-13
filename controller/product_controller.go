@@ -53,6 +53,14 @@ func (controller *ProductController) Update(c *fiber.Ctx) error {
 }
 
 func (controller *ProductController) Find(c *fiber.Ctx) error {
+	// This sample for get token and parse
+	/*bytes := c.Request().Header.Peek("Authorization")
+	token := string(bytes)[7:]
+	user, err := validation.ParseToken(token)
+	exception.PanicIfNeeded(err)
+	fmt.Println("ID ", user.Id)
+	fmt.Println("Username ", user.Username)*/
+
 	responses := controller.ProductService.Find()
 	return c.JSON(model.WebResponse{
 		Code:   200,
