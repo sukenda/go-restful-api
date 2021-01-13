@@ -38,7 +38,6 @@ func (service userServiceImpl) Register(request model.CreateUserRequest) (respon
 	response = model.CreateUserResponse{
 		Id:       user.Id,
 		Username: user.Username,
-		Password: "SECRET",
 		Email:    user.Email,
 		Phone:    user.Phone,
 	}
@@ -53,7 +52,6 @@ func (service userServiceImpl) FindByUsername(username string) (response model.C
 	response = model.CreateUserResponse{
 		Id:       user.Id,
 		Username: user.Username,
-		Password: "SECRET",
 		Email:    user.Email,
 		Phone:    user.Phone,
 	}

@@ -38,6 +38,31 @@ func (service *productServiceImpl) Save(request model.CreateProductRequest) (res
 	return response
 }
 
+func (service *productServiceImpl) Update(request model.CreateProductRequest) (response model.CreateProductResponse) {
+	validation.ValidateProduct(request)
+
+	product := entity.Product{
+		Id:       request.Id,
+		Name:     request.Name,
+		Price:    request.Price,
+		Quantity: request.Quantity,
+	}
+
+	service.repository.Update(product)
+
+	response = model.CreateProductResponse{
+		Id:       product.Id,
+		Name:     product.Name,
+		Price:    product.Price,
+		Quantity: product.Quantity,
+	}
+	return response
+}
+
+func (service *productServiceImpl) Delete(id string) {
+	service.repository.Delete(id)
+}
+
 func (service *productServiceImpl) Find() (responses []model.GetProductResponse) {
 	products := service.repository.FindAll()
 	for _, product := range products {
@@ -49,4 +74,14 @@ func (service *productServiceImpl) Find() (responses []model.GetProductResponse)
 		})
 	}
 	return responses
+}
+
+func (service *productServiceImpl) FindById(id string) (response model.CreateProductResponse) {
+	product := service.repository.FindById(id)
+	return model.CreateProductResponse{
+		Id:       product.Id,
+		Name:     product.Name,
+		Price:    product.Price,
+		Quantity: product.Quantity,
+	}
 }

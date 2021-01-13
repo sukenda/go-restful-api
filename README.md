@@ -5,6 +5,7 @@ Spring restful api build for learning go using fiber and mongodb
 # API Spec
 
 ## Register account
+
 Request :
 
 - Method : POST
@@ -110,7 +111,69 @@ Response :
 }
 ```
 
-## Get Product
+## Update Product
+
+Request :
+
+- Method : PUT
+- Endpoint : `/api/products`
+- Header :
+    - Authorization: Bearer xxxxx
+    - Content-Type: application/json
+    - Accept: application/json
+- Body :
+
+```json
+{
+  "id": "string",
+  "name": "string",
+  "price": "int64",
+  "quantity": "int32"
+}
+```
+
+Response :
+
+```json
+{
+  "code": "int",
+  "status": "string",
+  "data": {
+    "id": "string",
+    "name": "string",
+    "price": "int64",
+    "quantity": "int32"
+  }
+}
+```
+
+## Get Product By ID
+
+Request :
+
+- Method : GET
+- Endpoint : `/api/products/:id`
+- Header :
+    - Authorization: Bearer xxxxx
+    - Content-Type: application/json
+    - Accept: application/json
+
+Response :
+
+```json
+{
+  "code": "int",
+  "status": "string",
+  "data": {
+    "id": "string",
+    "name": "string",
+    "price": "int64",
+    "quantity": "int32"
+  }
+}
+```
+
+## Get Product All
 
 Request :
 
@@ -144,5 +207,27 @@ Response :
 }
 ```
 
+## Delete Product By ID
+
+Request :
+
+- Method : DELETE
+- Endpoint : `/api/products/:id`
+- Header :
+    - Authorization: Bearer xxxxx
+    - Content-Type: application/json
+    - Accept: application/json
+
+Response :
+
+```json
+{
+  "code": "int",
+  "status": "string",
+  "data": "string"
+}
+```
+
 # Reference
+
 https://github.com/khannedy/golang-clean-architecture

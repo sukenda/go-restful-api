@@ -31,6 +31,20 @@ func (repository productRepositoryImpl) Insert(product entity.Product) {
 	exception.PanicIfNeeded(err)
 }
 
+func (repository productRepositoryImpl) Update(product entity.Product) {
+	ctx, cancel := config.NewMongoContext()
+	defer cancel()
+
+	_, err := repository.Collection.UpdateOne(ctx, bson.M{"_id": product.Id}, bson.M{
+		"$set": bson.M{
+			"name":     product.Name,
+			"price":    product.Price,
+			"quantity": product.Quantity,
+		},
+	})
+	exception.PanicIfNeeded(err)
+}
+
 func (repository productRepositoryImpl) FindAll() (products []entity.Product) {
 	ctx, cancel := config.NewMongoContext()
 	defer cancel()
@@ -54,10 +68,28 @@ func (repository productRepositoryImpl) FindAll() (products []entity.Product) {
 	return products
 }
 
+func (repository productRepositoryImpl) FindById(id string) (product entity.Product) {
+	ctx, cancel := config.NewMongoContext()
+	defer cancel()
+
+	err := repository.Collection.FindOne(ctx, bson.M{"_id": id}).Decode(&product)
+	exception.PanicIfNeeded(err)
+
+	return product
+}
+
 func (repository productRepositoryImpl) DeleteAll() {
 	ctx, cancel := config.NewMongoContext()
 	defer cancel()
 
 	_, err := repository.Collection.DeleteMany(ctx, bson.M{})
+	exception.PanicIfNeeded(err)
+}
+
+func (repository productRepositoryImpl) Delete(id string) {
+	ctx, cancel := config.NewMongoContext()
+	defer cancel()
+
+	_, err := repository.Collection.DeleteOne(ctx, bson.M{"_id": id})
 	exception.PanicIfNeeded(err)
 }

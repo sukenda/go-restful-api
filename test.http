@@ -1,8 +1,3 @@
-### Get All Products
-GET http://localhost:8080/api/products
-Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MTA1NDU5MDYsInVzZXJuYW1lIjoic3VrZW5kYSJ9.V8vZrLDY0vq7OwhzbcPCn0pBH7tYJePlv_qIUZafL_o
-
 ### Create New Product
 POST http://localhost:8080/api/products
 Content-Type: application/json
@@ -10,10 +5,38 @@ Accept: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MTA1NDU5MDYsInVzZXJuYW1lIjoic3VrZW5kYSJ9.V8vZrLDY0vq7OwhzbcPCn0pBH7tYJePlv_qIUZafL_o
 
 {
-  "name": "Mac Book Pro 30",
+  "name": "Mac Book Pro 01",
   "price": 35000000,
   "quantity": 10
 }
+
+### Update Product
+PUT http://localhost:8080/api/products
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MTA1NDU5MDYsInVzZXJuYW1lIjoic3VrZW5kYSJ9.V8vZrLDY0vq7OwhzbcPCn0pBH7tYJePlv_qIUZafL_o
+
+{
+  "id": "9cca18b4-3646-41d6-8dc7-1e0dbeaa0f88",
+  "name": "Mac Book Pro 01 Edited",
+  "price": 34000000,
+  "quantity": 20
+}
+
+### Find By ID
+GET http://localhost:8080/api/products/9cca18b4-3646-41d6-8dc7-1e0dbeaa0f88
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MTA1NDU5MDYsInVzZXJuYW1lIjoic3VrZW5kYSJ9.V8vZrLDY0vq7OwhzbcPCn0pBH7tYJePlv_qIUZafL_o
+
+### Delete
+DELETE http://localhost:8080/api/products/9cca18b4-3646-41d6-8dc7-1e0dbeaa0f88
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MTA1NDU5MDYsInVzZXJuYW1lIjoic3VrZW5kYSJ9.V8vZrLDY0vq7OwhzbcPCn0pBH7tYJePlv_qIUZafL_o
+
+### Get All Products
+GET http://localhost:8080/api/products
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MTA1NDU5MDYsInVzZXJuYW1lIjoic3VrZW5kYSJ9.V8vZrLDY0vq7OwhzbcPCn0pBH7tYJePlv_qIUZafL_o
 
 ### Register User
 POST http://localhost:8080/api/signup
@@ -21,8 +44,8 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "username": "AppG44o",
-  "password": "Sukendaa",
+  "username": "sukenda",
+  "password": "sukenda",
   "email": "soekenda09@gmail.com",
   "phone": "098777889876"
 }
@@ -34,5 +57,5 @@ Accept: application/json
 
 {
   "username": "sukenda",
-  "password": "1234"
+  "password": "sukenda"
 }
