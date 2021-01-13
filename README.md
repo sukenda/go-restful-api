@@ -1,6 +1,6 @@
 # Go Restful Api
 
-Spring restful api build for learning go using fiber and mongodb
+Go restful api build for learning go using fiber and mongodb
 
 # API Spec
 
