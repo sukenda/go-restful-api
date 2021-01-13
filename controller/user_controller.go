@@ -19,7 +19,7 @@ func NewUserController(userService *service.UserService) UserController {
 }
 
 func (controller *UserController) Route(app *fiber.App) {
-	app.Post("/api/register", controller.Register)
+	app.Post("/api/signup", controller.Register)
 	app.Post("/api/login", controller.Login)
 }
 
@@ -30,7 +30,7 @@ func (controller *UserController) Register(c *fiber.Ctx) error {
 
 	exception.PanicIfNeeded(err)
 
-	response := controller.UserService.Insert(request)
+	response := controller.UserService.Register(request)
 	return c.JSON(model.WebResponse{
 		Code:   200,
 		Status: "OK",

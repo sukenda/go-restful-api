@@ -10,18 +10,18 @@ Accept: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MTA1NDU5MDYsInVzZXJuYW1lIjoic3VrZW5kYSJ9.V8vZrLDY0vq7OwhzbcPCn0pBH7tYJePlv_qIUZafL_o
 
 {
-  "name": "Mac Book Pro 6",
+  "name": "Mac Book Pro 30",
   "price": 35000000,
   "quantity": 10
 }
 
 ### Register User
-POST http://localhost:8080/api/register
+POST http://localhost:8080/api/signup
 Content-Type: application/json
 Accept: application/json
 
 {
-  "username": "Budi",
+  "username": "AppG44o",
   "password": "Sukendaa",
   "email": "soekenda09@gmail.com",
   "phone": "098777889876"
@@ -34,5 +34,5 @@ Accept: application/json
 
 {
   "username": "sukenda",
-  "password": "Ke"
+  "password": "1234"
 }

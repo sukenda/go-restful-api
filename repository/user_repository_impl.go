@@ -25,7 +25,7 @@ func (repository userRepositoryImpl) Insert(user entity.User) error {
 	_, err := repository.FindByUsername(user.Username)
 	if err == nil {
 		exception.PanicIfNeeded(exception.ValidationError{
-			Message: "User exist",
+			Message: "USER_EXIST",
 		})
 	}
 
@@ -45,25 +45,15 @@ func (repository userRepositoryImpl) FindByUsername(username string) (user entit
 	ctx, cancel := config.NewMongoContext()
 	defer cancel()
 
-	cursor, err := repository.Collection.Find(ctx, bson.M{"username": username})
-	exception.PanicIfNeeded(err)
-
-	var documents []bson.M
-	err = cursor.All(ctx, &documents)
-	exception.PanicIfNeeded(err)
-
-	// Return 1 or 0
-	if len(documents) == 0 {
-		return user, errors.New("USER_NOT_FOUND")
+	filter := bson.M{"username": username}
+	err = repository.Collection.FindOne(ctx, filter).Decode(&user)
+	if err != nil {
+		if err == mongo.ErrNoDocuments {
+			return user, errors.New("USER_NOT_FOUND")
+		}
 	}
 
-	return entity.User{
-		Id:       documents[0]["_id"].(string),
-		Username: documents[0]["username"].(string),
-		Password: documents[0]["password"].(string),
-		Email:    documents[0]["email"].(string),
-		Phone:    documents[0]["phone"].(string),
-	}, nil
+	return user, nil
 }
 
 func (repository userRepositoryImpl) Login(username, password string) (user entity.User, err error) {
@@ -71,12 +61,18 @@ func (repository userRepositoryImpl) Login(username, password string) (user enti
 	defer cancel()
 
 	user, err = repository.FindByUsername(username)
+	if err != nil {
+		exception.PanicIfNeeded(exception.ValidationError{
+			Message: "USER_NOT_FOUND",
+		})
+	}
+
 	exception.PanicIfNeeded(err)
 
 	match, _ := validation.ValidatePassword(password, user.Password)
 	if !match {
 		exception.PanicIfNeeded(exception.ValidationError{
-			Message: "Password not valid",
+			Message: "PASSWORD_WRONG",
 		})
 	}
 

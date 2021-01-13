@@ -17,7 +17,7 @@ type productServiceImpl struct {
 	repository repository.ProductRepository
 }
 
-func (service *productServiceImpl) Create(request model.CreateProductRequest) (response model.CreateProductResponse) {
+func (service *productServiceImpl) Save(request model.CreateProductRequest) (response model.CreateProductResponse) {
 	validation.ValidateProduct(request)
 
 	product := entity.Product{
@@ -38,7 +38,7 @@ func (service *productServiceImpl) Create(request model.CreateProductRequest) (r
 	return response
 }
 
-func (service *productServiceImpl) List() (responses []model.GetProductResponse) {
+func (service *productServiceImpl) Find() (responses []model.GetProductResponse) {
 	products := service.repository.FindAll()
 	for _, product := range products {
 		responses = append(responses, model.GetProductResponse{

@@ -18,7 +18,7 @@ type userServiceImpl struct {
 	repository repository.UserRepository
 }
 
-func (service userServiceImpl) Insert(request model.CreateUserRequest) (response model.CreateUserResponse) {
+func (service userServiceImpl) Register(request model.CreateUserRequest) (response model.CreateUserResponse) {
 	validation.ValidateUser(request)
 
 	pass, err := validation.HashPassword(request.Password)

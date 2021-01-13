@@ -3,8 +3,7 @@ package service
 import "github.com/sukenda/go-restful-api/model"
 
 type ProductService interface {
-	Create(request model.CreateProductRequest) (response model.CreateProductResponse)
+	Save(request model.CreateProductRequest) (response model.CreateProductResponse)
 
-	List() (responses []model.GetProductResponse)
-
+	Find() (responses []model.GetProductResponse)
 }

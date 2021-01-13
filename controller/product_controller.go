@@ -28,7 +28,7 @@ func (controller *ProductController) Create(c *fiber.Ctx) error {
 
 	exception.PanicIfNeeded(err)
 
-	response := controller.ProductService.Create(request)
+	response := controller.ProductService.Save(request)
 	return c.JSON(model.WebResponse{
 		Code:   200,
 		Status: "OK",
@@ -37,7 +37,7 @@ func (controller *ProductController) Create(c *fiber.Ctx) error {
 }
 
 func (controller *ProductController) List(c *fiber.Ctx) error {
-	responses := controller.ProductService.List()
+	responses := controller.ProductService.Find()
 	return c.JSON(model.WebResponse{
 		Code:   200,
 		Status: "OK",
