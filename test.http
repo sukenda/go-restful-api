@@ -56,6 +56,6 @@ Content-Type: application/json
 Accept: application/json
 
 {
-  "username": "sukenda",
-  "password": "sukenda"
+  "username": "admin",
+  "password": "admin"
 }

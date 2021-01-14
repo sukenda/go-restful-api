@@ -5,6 +5,7 @@ import (
 )
 
 type UserService interface {
+
 	Register(request model.CreateUserRequest) (response model.CreateUserResponse)
 
 	FindByUsername(username string) (response model.CreateUserResponse)

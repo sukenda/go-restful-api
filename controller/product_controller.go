@@ -8,6 +8,8 @@ import (
 	"github.com/sukenda/go-restful-api/service"
 )
 
+const PRODUCTS = "/api/products"
+
 type ProductController struct {
 	ProductService service.ProductService
 }
@@ -17,11 +19,11 @@ func NewProductController(productService *service.ProductService) ProductControl
 }
 
 func (controller *ProductController) Route(app *fiber.App) {
-	app.Post("/api/products", controller.Save)
-	app.Put("/api/products", controller.Update)
-	app.Get("/api/products", controller.Find)
-	app.Get("/api/products/:id", controller.FindById)
-	app.Delete("/api/products/:id", controller.Delete)
+	app.Post(PRODUCTS, controller.Save)
+	app.Put(PRODUCTS, controller.Update)
+	app.Get(PRODUCTS, controller.Find)
+	app.Get(PRODUCTS+"/:id", controller.FindById)
+	app.Delete(PRODUCTS+"/:id", controller.Delete)
 }
 
 func (controller *ProductController) Save(c *fiber.Ctx) error {

@@ -12,6 +12,7 @@ func createTestApp() *fiber.App {
 	var app = fiber.New(config.NewFiberConfig())
 	app.Use(recover.New())
 	productController.Route(app)
+	userController.Route(app)
 	return app
 }
 
@@ -21,6 +22,10 @@ var database = config.NewMongoDatabase(configuration)
 var productRepository = repository.NewProductRepository(database)
 var productService = service.NewProductService(&productRepository)
 
+var userRepository = repository.NewUserRepository(database)
+var userService = service.NewUserService(&userRepository)
+
 var productController = NewProductController(&productService)
+var userController = NewUserController(&userService)
 
 var app = createTestApp()
