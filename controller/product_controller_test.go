@@ -12,18 +12,21 @@ import (
 	"testing"
 )
 
-func TestProductController_Create(t *testing.T) {
+func TestProductControllerSave(t *testing.T) {
 	productRepository.DeleteAll()
+
 	createProductRequest := model.CreateProductRequest{
 		Name:     "Test Product",
 		Price:    1000,
 		Quantity: 1000,
 	}
+
 	requestBody, _ := json.Marshal(createProductRequest)
 
 	request := httptest.NewRequest("POST", "/api/products", bytes.NewBuffer(requestBody))
 	request.Header.Set("Content-Type", "application/json")
 	request.Header.Set("Accept", "application/json")
+	request.Header.Set("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5N2RlNTQ3Ny1jY2RiLTQ2MWMtYjUyMS05ZmIwZTczNjBlOWUiLCJ1c2VybmFtZSI6InN1a2VuZGEiLCJyb2xlIjoiQWRtaW4iLCJleHAiOjE2MTA3ODUzMjd9.qwMSzCCC1SIMIOcvuIudzvFBoXcmcp63c7nIGlQSZLc")
 
 	response, _ := app.Test(request)
 
@@ -44,18 +47,21 @@ func TestProductController_Create(t *testing.T) {
 	assert.Equal(t, createProductRequest.Quantity, createProductResponse.Quantity)
 }
 
-func TestProductController_List(t *testing.T) {
+func TestProductControllerFind(t *testing.T) {
 	productRepository.DeleteAll()
+
 	product := entity.Product{
 		Id:       uuid.New().String(),
 		Name:     "Sample Product",
 		Price:    1000,
 		Quantity: 1000,
 	}
+
 	productRepository.Insert(product)
 
 	request := httptest.NewRequest("GET", "/api/products", nil)
 	request.Header.Set("Accept", "application/json")
+	request.Header.Set("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5N2RlNTQ3Ny1jY2RiLTQ2MWMtYjUyMS05ZmIwZTczNjBlOWUiLCJ1c2VybmFtZSI6InN1a2VuZGEiLCJyb2xlIjoiQWRtaW4iLCJleHAiOjE2MTA3ODUzMjd9.qwMSzCCC1SIMIOcvuIudzvFBoXcmcp63c7nIGlQSZLc")
 
 	response, _ := app.Test(request)
 

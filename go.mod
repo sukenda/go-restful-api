@@ -7,7 +7,7 @@ require (
 	github.com/form3tech-oss/jwt-go v3.2.2+incompatible
 	github.com/go-ozzo/ozzo-validation/v4 v4.2.2
 	github.com/gofiber/fiber/v2 v2.3.2
-	github.com/gofiber/jwt/v2 v2.1.0 // indirect
+	github.com/gofiber/jwt/v2 v2.1.0
 	github.com/google/uuid v1.1.2
 	github.com/joho/godotenv v1.3.0
 	github.com/klauspost/compress v1.11.6 // indirect
