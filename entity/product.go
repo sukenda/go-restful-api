@@ -5,4 +5,10 @@ type Product struct {
 	Name     string
 	Price    int64
 	Quantity int32
+	Images   []ProductImage `bson:"images"`
+}
+
+type ProductImage struct {
+	Name string
+	Path string
 }

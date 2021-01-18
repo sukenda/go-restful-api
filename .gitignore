@@ -37,4 +37,5 @@ out/
 .idea/httpRequests
 
 logs.log
+images/**.png
 

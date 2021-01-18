@@ -18,6 +18,20 @@ type productRepositoryImpl struct {
 	Collection *mongo.Collection
 }
 
+func (repository productRepositoryImpl) Upload(id string, images []entity.ProductImage) (product entity.Product) {
+	ctx, cancel := config.NewMongoContext()
+	defer cancel()
+
+	_, err := repository.Collection.UpdateOne(ctx, bson.M{"_id": id}, bson.M{
+		"$set": bson.M{
+			"images": images,
+		},
+	})
+	exception.PanicIfNeeded(err)
+
+	return repository.FindById(id)
+}
+
 func (repository productRepositoryImpl) Insert(product entity.Product) {
 	ctx, cancel := config.NewMongoContext()
 	defer cancel()
@@ -57,6 +71,16 @@ func (repository productRepositoryImpl) FindAll() (products []entity.Product) {
 	exception.PanicIfNeeded(err)
 
 	for _, document := range documents {
+		/*images := document["images"].([]primitive.A)
+		var result []entity.ProductImage
+		for _, image := range images {
+			//imageMap := image.(bson.M)
+			result = append(result, entity.ProductImage{
+				Name: image["name"].(string),
+				Path: image["path"].(string),
+			})
+		}*/
+
 		products = append(products, entity.Product{
 			Id:       document["_id"].(string),
 			Name:     document["name"].(string),

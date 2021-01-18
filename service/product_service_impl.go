@@ -65,7 +65,16 @@ func (service *productServiceImpl) Delete(id string) {
 
 func (service *productServiceImpl) Find() (responses []model.GetProductResponse) {
 	products := service.repository.FindAll()
+
 	for _, product := range products {
+		var images []model.ProductImage
+		for _, image := range product.Images {
+			images = append(images, model.ProductImage{
+				Name: image.Name,
+				Path: image.Path,
+			})
+		}
+
 		responses = append(responses, model.GetProductResponse{
 			Id:       product.Id,
 			Name:     product.Name,
@@ -78,10 +87,39 @@ func (service *productServiceImpl) Find() (responses []model.GetProductResponse)
 
 func (service *productServiceImpl) FindById(id string) (response model.CreateProductResponse) {
 	product := service.repository.FindById(id)
+	var images []model.ProductImage
+
+	for _, image := range product.Images {
+		images = append(images, model.ProductImage{
+			Name: image.Name,
+			Path: image.Path,
+		})
+	}
+
 	return model.CreateProductResponse{
 		Id:       product.Id,
 		Name:     product.Name,
 		Price:    product.Price,
 		Quantity: product.Quantity,
+		Images:   images,
+	}
+}
+
+func (service *productServiceImpl) Upload(id string, images []model.ProductImage) (response model.CreateProductResponse) {
+	var params []entity.ProductImage
+	for _, image := range images {
+		params = append(params, entity.ProductImage{
+			Name: image.Name,
+			Path: image.Path,
+		})
+	}
+
+	product := service.repository.Upload(id, params)
+	return model.CreateProductResponse{
+		Id:       product.Id,
+		Name:     product.Name,
+		Price:    product.Price,
+		Quantity: product.Quantity,
+		Images:   images,
 	}
 }

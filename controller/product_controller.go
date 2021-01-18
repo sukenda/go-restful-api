@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"fmt"
 	"github.com/gofiber/fiber/v2"
 	"github.com/google/uuid"
 	"github.com/sukenda/go-restful-api/exception"
@@ -24,6 +25,7 @@ func (controller *ProductController) Route(app *fiber.App) {
 	app.Get(PRODUCTS, controller.Find)
 	app.Get(PRODUCTS+"/:id", controller.FindById)
 	app.Delete(PRODUCTS+"/:id", controller.Delete)
+	app.Post(PRODUCTS+"/:id/images", controller.Upload)
 }
 
 func (controller *ProductController) Save(c *fiber.Ctx) error {
@@ -89,5 +91,39 @@ func (controller *ProductController) Delete(c *fiber.Ctx) error {
 		Code:   200,
 		Status: "OK",
 		Data:   "Delete success",
+	})
+}
+
+func (controller *ProductController) Upload(c *fiber.Ctx) error {
+	var id = c.Params("id")
+	var images []model.ProductImage
+
+	image1, err := c.FormFile("image1")
+	exception.PanicIfNeeded(err)
+
+	err1 := c.SaveFile(image1, fmt.Sprintf("./images/%s", image1.Filename))
+	if err1 == nil {
+		images = append(images, model.ProductImage{
+			Name: image1.Filename,
+			Path: fmt.Sprintf("./images/%s", image1.Filename),
+		})
+	}
+
+	image2, err := c.FormFile("image2")
+	exception.PanicIfNeeded(err)
+
+	err2 := c.SaveFile(image2, fmt.Sprintf("./images/%s", image2.Filename))
+	if err2 == nil {
+		images = append(images, model.ProductImage{
+			Name: image2.Filename,
+			Path: fmt.Sprintf("./images/%s", image2.Filename),
+		})
+	}
+
+	response := controller.ProductService.Upload(id, images)
+	return c.JSON(model.WebResponse{
+		Code:   200,
+		Status: "OK",
+		Data:   response,
 	})
 }

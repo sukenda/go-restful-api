@@ -1,9 +1,10 @@
 package repository
 
-import "github.com/sukenda/go-restful-api/entity"
+import (
+	"github.com/sukenda/go-restful-api/entity"
+)
 
 type ProductRepository interface {
-
 	Insert(product entity.Product)
 
 	Update(product entity.Product)
@@ -15,4 +16,6 @@ type ProductRepository interface {
 	DeleteAll()
 
 	Delete(id string)
+
+	Upload(id string, images []entity.ProductImage) (product entity.Product)
 }

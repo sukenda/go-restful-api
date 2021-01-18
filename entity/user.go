@@ -6,4 +6,5 @@ type User struct {
 	Password string
 	Email    string
 	Phone    string
+	Profile  string
 }
